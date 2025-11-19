@@ -36,7 +36,7 @@ class loker{
                 <button class="btn btn-sm ${this.data[i][14].toLowerCase()} disabled">${this.data[i][14].toUpperCase()}</button>
             </td>
             <td>
-                <a href="./detail.html?id=${this.data[i][0]+1}" class="btn btn-sm btn-success"><i class="fa-regular fa-eye"></i></a>
+                <a href="./detail.html?id=${this.data[i][0]}" class="btn btn-sm btn-success"><i class="fa-regular fa-eye"></i></a>
                 <a href="${this.data[i][10]}" target="_blank" class="btn btn-sm btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </td>`
 
@@ -46,16 +46,15 @@ class loker{
         table.appendChild(tbody);
         this.gsheet.dom.appendChild(table);
 
-        new DataTable(table,{            
-            responsive: true,
-            destroy: true
+        new DataTable(table,{
+            destroy: true,
+            responsive: true
         })
     }
 
     async displayDetail(){
         let conn = await this.gsheet.connect()
         this.data = conn[0].value[this.id];
-        console.log(this.id);
         let card = document.createElement("div");
         let tanggal_mulai = new Date(this.data[12]);
         let tanggal_selesai = new Date(this.data[13]);
